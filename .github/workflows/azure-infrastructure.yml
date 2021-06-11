@@ -22,6 +22,7 @@ jobs:
     env:
       resourceGroup: ansibleRG
       subscription: Hjemmeprosjekt
+      location: norwayeast
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -37,5 +38,8 @@ jobs:
       - name: Create VM
         run: |
           echo Starting...
+          echo Creating resource group..
+          az group create --location ${{ env.location }} --name ${{ env.resourceGroup }} --subscription  ${{ env.subscription }}
+          echo Creating VM
           az deployment group create --resource-group ${{ env.resourceGroup }} --subscription  ${{ env.subscription }} --template-file ansible-vm/ansible-vm.json --parameters @ansible-vm/ansible-vm.parameters.json
           echo Done
