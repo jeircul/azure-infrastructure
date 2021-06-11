@@ -23,6 +23,7 @@ jobs:
       resourceGroup: ansibleRG
       subscription: Hjemmeprosjekt
       location: norwayeast
+      vmName: ansible-project-vm
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -42,4 +43,6 @@ jobs:
           az group create --location ${{ env.location }} --name ${{ env.resourceGroup }} --subscription  ${{ env.subscription }}
           echo Creating VM
           az deployment group create --resource-group ${{ env.resourceGroup }} --subscription  ${{ env.subscription }} --template-file ansible-vm/ansible-vm.json --parameters @ansible-vm/ansible-vm.parameters.json
+          echo Installing Ansible..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ vmName }} --command-id RunShellScript --scripts "sudo apt update sudo apt install software-properties-common sudo add-apt-repository --yes --update ppa:ansible/ansible sudo apt install ansible"
           echo Done
