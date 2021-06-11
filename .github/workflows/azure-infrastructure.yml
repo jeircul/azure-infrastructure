@@ -46,5 +46,7 @@ jobs:
           echo Updating system
           az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo yum update"
           echo Installing Ansible..
-          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo yum install epel-release && sudo yum install ansible"
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo yum install epel-release"
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo yum install ansible"
+
           echo Done
