@@ -37,5 +37,5 @@ jobs:
       - name: Create VM
         run: |
           echo Starting...
-          az deployment group create --resource-group ${{ env.resourceGroup }} --subscription  ${{ env.subscription }} -template-file ansible-vm/ansible-vm.json --parameters @ansible-vm.parameters.json
+          az deployment group create --resource-group ${{ env.resourceGroup }} --subscription  ${{ env.subscription }} --template-file ansible-vm/ansible-vm.json --parameters @ansible-vm.parameters.json
           echo Done
