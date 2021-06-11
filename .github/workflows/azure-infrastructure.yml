@@ -31,7 +31,7 @@ jobs:
       # Runs a single command using the runners shell
       - uses: azure/login@v1.1
           with:
-          creds: ${{ secrets.AZURE_SP_CREDS }}
+            creds: ${{ secrets.AZURE_SP_CREDS }}
 
       # Runs a set of commands using the runners shell
       - name: Create VM
