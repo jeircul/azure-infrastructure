@@ -1,6 +1,6 @@
 # azure-infrastructure
 This is my introduction to Infrastructure as Code.
-There are a lot of approvement that can be done, but my goal is to learn IAC and some of the tools that goes with it.
+There are a lot of approvements that can be done, but my goal is to learn IAC and some of the tools that goes with it.
 
 And if someone can use this to get some ideas of their own, thats just a plus!
 
@@ -20,6 +20,7 @@ And if someone can use this to get some ideas of their own, thats just a plus!
     }
     ```
 - You need to [create a public-private key pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys) to use the server with ssh private keys. Public key can be put in *ansible-vm.parameters.json*. Private key should **never** be shared.
+
 ### Workflow
 This workflow does the following:
 1. Logs in to your Azure account
