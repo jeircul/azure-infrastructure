@@ -30,12 +30,15 @@ This workflow does the following:
 
 ### Deployment
 
+#### Change input parameters and environment variables
 To change the input parameters and environment variables to suit your own needs, do the following:
 - Go to the *ansible-vm.parameters.json* to change project name, Azure location, Administrator account and VM size.
 - Go to the *deploy_VM_with_ARM.yml* and locate environment variables to set which Subscription you want to use (this needs to already exist in your Azure environment), set resource group name (this can be an already existing one or a new resource group that will be created), Azure location and VM name (should be *projectName* plus *-vm* extension)
 
+#### Run Github Action Workflow to deploy
 To deploy, go to Github Actions, choose the *Deploy Ansible VM with ARM templates* on the left hand side. On the right hand side you choose *Run workflow* and choose your branch the branch and run.
 
+#### SSH into your VM after deployment is done
 You should now be able to ssh into the newly created VM.
-In the Azure portal, navigate to your VM and choose *Connect* for details of how to connect.
+In the Azure portal, navigate to your VM and choose *Connect* for details of how to connect. To see if Ansible has been installed run `ansible --version`.
 
