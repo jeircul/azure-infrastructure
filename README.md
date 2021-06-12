@@ -5,7 +5,7 @@ There are a lot of approvements that can be done, but my goal is to learn IAC an
 And if someone can use this to get some ideas of their own, thats just a plus!
 
 
-## Deploy a CentOS VM with ARM templates with Ansible installed
+## Deploy a CentOS VM with Ansible installed using ARM templates
 
 ### Prerequisites
 - You need an Azure account and subscription
