@@ -16,10 +16,7 @@ jobs:
     # Environment variables
     env:
       tf_actions_working_dir: ./terraform # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
-    defaults:
-      run:
-        working-directory: ${{ env.tf_actions_working_dir }}
-        
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
