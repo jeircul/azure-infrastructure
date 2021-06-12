@@ -15,10 +15,10 @@ jobs:
     
     # Environment variables
     env:
-      subscription: MySubscription # This subscription need to already exist
-      resourceGroup: MyResourceGroup # This resource group will be created if it does not exist from before
+      subscription: Hjemmeprosjekt # This subscription need to already exist
+      resourceGroup: ansibleRG # This resource group will be created if it does not exist from before
       location: norwayeast
-      vmName: MyProject-vm # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
+      vmName: iacproject-vm # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
