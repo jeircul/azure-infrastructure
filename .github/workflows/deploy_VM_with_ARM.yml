@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy Ansible VM with ARM templates
+
+# Controls when the action will run. 
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      subscription: Hjemmeprosjekt
+      resourceGroup: ansibleRG
+      location: norwayeast
+      vmName: ansible-project-vm
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - uses: azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_SP_CREDS }}
+
+      # Runs a set of commands using the runners shell
+      - name: Create VM
+        run: |
+          echo Starting...
+          echo Creating resource group..
+          az group create --location ${{ env.location }} --name ${{ env.resourceGroup }} --subscription  ${{ env.subscription }}
+          echo Creating VM
+          az deployment group create --resource-group ${{ env.resourceGroup }} --subscription  ${{ env.subscription }} --template-file ansible-vm-with-arm/ansible-vm.json --parameters @ansible-vm-with-arm/ansible-vm.parameters.json
+          echo Updating system
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo yum update"
+          echo Installing Ansible..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "yes | sudo yum install epel-release"
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "yes | sudo yum install -y ansible"
+
+          echo Done
