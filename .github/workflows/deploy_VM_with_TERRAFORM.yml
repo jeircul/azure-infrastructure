@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy Ansible VM with TERRAFORM
+
+# Controls when the action will run. 
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    # Environment variables
+    env:
+      subscription: MySubscription # This subscription need to already exist
+      resourceGroup: MyResourceGroup # This resource group will be created if it does not exist from before
+      location: norwayeast
+      vmName: MyProject-vm # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - uses: azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_SP_CREDS }}
+
+      # Runs a set of commands using the runners shell
+      - name: Create VM
+        run: |
+          echo Starting...
+          echo Creating resource group..
+
+          echo Done
