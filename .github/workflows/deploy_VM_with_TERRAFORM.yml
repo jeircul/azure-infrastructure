@@ -64,12 +64,11 @@ jobs:
       
       - name: Update and install dependencies
         run: |
-          echo Running update..
-          sudo apt-get update
+          echo Updating system..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt update"
           echo Running install software-properties-common
-          sudo apt install software-properties-common
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt install software-properties-common"
           echo Running add-apt-repository --yes --update ppa:ansible/ansible
-          sudo add-apt-repository --yes --update ppa:ansible/ansible
-      
-      - name: Install Ansible
-        run: sudo apt -y install ansible
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo add-apt-repository --yes --update ppa:ansible/ansible
+          echo Installing Ansible..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt -y install ansible"
