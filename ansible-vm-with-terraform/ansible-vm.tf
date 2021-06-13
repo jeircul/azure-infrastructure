@@ -130,7 +130,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     size                  = "Standard_B2s"
 
     os_disk {
-        name              = "osDisk"
+        name              = join("", [var.project_name, "osDisk"])
         caching           = "ReadWrite"
         storage_account_type = "Premium_LRS"
     }
