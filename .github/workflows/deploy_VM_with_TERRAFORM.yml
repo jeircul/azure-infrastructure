@@ -69,4 +69,4 @@ jobs:
           sudo add-apt-repository --yes --update ppa:ansible/ansible
       
       - name: Install Ansible
-        run: sudo apt install ansible
+        run: sudo apt -y install ansible
