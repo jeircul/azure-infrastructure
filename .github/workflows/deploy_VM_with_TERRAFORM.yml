@@ -64,8 +64,11 @@ jobs:
       
       - name: Update and install dependencies
         run: |
+          echo Running update..
           sudo apt-get update
+          echo Running install software-properties-common
           sudo apt install software-properties-common
+          echo Running add-apt-repository --yes --update ppa:ansible/ansible
           sudo add-apt-repository --yes --update ppa:ansible/ansible
       
       - name: Install Ansible
