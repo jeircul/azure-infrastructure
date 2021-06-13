@@ -28,6 +28,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_SP_CREDS }}
       - uses: hashicorp/setup-terraform@v1
+
+      - name: Check account
+        run: az account show
+        
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
