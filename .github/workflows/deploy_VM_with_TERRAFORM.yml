@@ -15,7 +15,7 @@ jobs:
     
     # Environment variables
     env:
-      tf_actions_working_dir: ./terraform
+      tf_actions_working_dir: ./ansible-vm-with-terraform
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
