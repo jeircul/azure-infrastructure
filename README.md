@@ -72,13 +72,13 @@ This workflow does the following:
 ### Deployment
 
 #### Set client secret as environment variable
-Terraform needs the client id, tenant id and the client secret of the service principal to be set as environment variables in *.gihub/workflows/deploy_vm_with_terraform.yml*. It also needs the subscription id.
+Terraform needs the client id, tenant id and the client secret of the service principal to be set as environment variables in *.gihub/workflows/deploy_vm_with_terraform.yml*. It also needs the subscription id.  
 **Client secret:** Add a new Github Action secret called AZURE_SP_CLIENT_SECRET containing the client secret as value.\*  
 **Client id, tenant id and subscription id**: You can add secrets for these values as well, one seperate for each id. Or you can add it in plain text in the file.
 
  \* The client secret is impossible to retrieve if you did not save it when you first created it. So you need to either reset it or create a new one. Remeber to update the AZURE_SP_CREDS secret if you do this.
 
-###¤ Change input parameters and environment variables
+#### Change input parameters and environment variables
 To change the input parameters and environment variables to suit your own needs, do the following:
 - Go to *ansible-vm-with-terraform/variables.tf* to set:
     - Project name (most resources will have the project name plus a post-fix (example: the virtual machine will be *projectName-vm*))
