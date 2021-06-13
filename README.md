@@ -42,11 +42,6 @@ To deploy, go to Github Actions, choose the *Deploy Ansible VM with ARM template
 You should now be able to ssh into the newly created VM.
 In the Azure portal, navigate to your VM and choose *Connect* for details of how to connect. To see if Ansible has been installed run `ansible --version`.
 
-## Deploy an Ubuntu VM with Ansible installed using Terraform
-***
-**NOTE**  
-This action uses the same Service Principal as above, so if you already added it in the *Deploy a CentOS VM with Ansible installed using ARM templates* action, then you don't need to do it here.
-***
 ### Prerequisites
 - You need an Azure account and subscription
 - You need a [service principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) and define a new secret in Github Secrets. The secret must be called AZURE_SP_CREDS and it needs to have a structure like this: 
