@@ -110,7 +110,7 @@ resource "random_id" "randomId" {
 
 # Storage account
 resource "azurerm_storage_account" "storageaccount" {
-    name                        = join("", [var.project_name, "${random_id.randomId.hex}"])
+    name                        = "storage${random_id.randomId.hex}"
     resource_group_name         = azurerm_resource_group.terraformgroup.name
     location                    = var.location
     account_replication_type    = "LRS"
