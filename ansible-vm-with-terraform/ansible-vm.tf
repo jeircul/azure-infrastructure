@@ -13,7 +13,7 @@ provider "azurerm" {
 # Resource group
 resource "azurerm_resource_group" "terraformgroup" {
     name     = "ansibleTerraformRG"
-    location = "norwayeast"
+    location = var.location
 
     tags = {
         environment = "Terraform Deployment"
@@ -24,7 +24,7 @@ resource "azurerm_resource_group" "terraformgroup" {
 resource "azurerm_virtual_network" "terraformnetwork" {
     name                = "virtualNetwork"
     address_space       = ["10.0.0.0/16"]
-    location            = "norwayeast"
+    location            = var.location
     resource_group_name = azurerm_resource_group.terraformgroup.name
 
     tags = {
@@ -43,7 +43,7 @@ resource "azurerm_subnet" "terraformsubnet" {
 # Public IP
 resource "azurerm_public_ip" "terraformpublicip" {
     name                         = "publicIP"
-    location                     = "norwayeast"
+    location                     = var.location
     resource_group_name          = azurerm_resource_group.terraformgroup.name
     allocation_method            = "Dynamic"
 
@@ -55,7 +55,7 @@ resource "azurerm_public_ip" "terraformpublicip" {
 # Network security group
 resource "azurerm_network_security_group" "terraformnsg" {
     name                = "networkSecurityGroup"
-    location            = "norwayeast"
+    location            = var.location
     resource_group_name = azurerm_resource_group.terraformgroup.name
 
     security_rule {
@@ -78,7 +78,7 @@ resource "azurerm_network_security_group" "terraformnsg" {
 # Network interface card
 resource "azurerm_network_interface" "terraformnic" {
     name                        = "terraform-vm-nic"
-    location                    = "norwayeast"
+    location                    = var.location
     resource_group_name         = azurerm_resource_group.terraformgroup.name
 
     ip_configuration {
@@ -111,7 +111,7 @@ resource "random_id" "randomId" {
 resource "azurerm_storage_account" "storageaccount" {
     name                        = "diag${random_id.randomId.hex}"
     resource_group_name         = azurerm_resource_group.terraformgroup.name
-    location                    = "norwayeast"
+    location                    = var.location
     account_replication_type    = "LRS"
     account_tier                = "Standard"
 
@@ -133,7 +133,7 @@ output "tls_private_key" {
 # Virtual machine
 resource "azurerm_linux_virtual_machine" "terraformvm" {
     name                  = "terraform-vm"
-    location              = "norwayeast"
+    location              = var.location
     resource_group_name   = azurerm_resource_group.terraformgroup.name
     network_interface_ids = [azurerm_network_interface.terraformnic.id]
     size                  = "Standard_B2s"
