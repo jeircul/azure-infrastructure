@@ -71,6 +71,6 @@ jobs:
           echo Running install software-properties-common
           az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt install software-properties-common"
           echo Running add-apt-repository --yes --update ppa:ansible/ansible
-          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo add-apt-repository --yes --update ppa:ansible/ansible
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo add-apt-repository --yes --update ppa:ansible/ansible"
           echo Installing Ansible..
           az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt -y install ansible"
