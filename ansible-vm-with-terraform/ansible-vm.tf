@@ -12,7 +12,7 @@ provider "azurerm" {
 
 # Resource group
 resource "azurerm_resource_group" "terraformgroup" {
-    name     = "${ var.project_name } -vnet"
+    name     = join("", [var.project_name,"-vnet"])
     location = var.location
 
     tags = {
