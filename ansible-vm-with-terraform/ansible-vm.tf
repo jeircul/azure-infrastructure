@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "~>2.0"
+      version = "=2.46.0"
     }
   }
 }
@@ -12,8 +12,8 @@ provider "azurerm" {
 
 # Resource group
 resource "azurerm_resource_group" "terraformgroup" {
-    name     = "ansibleTerraformRG"
-    location = "norwayeast"
+    name     = var.resource_group
+    location = var.location
 
     tags = {
         environment = "Terraform Deployment"
@@ -22,9 +22,9 @@ resource "azurerm_resource_group" "terraformgroup" {
 
 # Virtual network
 resource "azurerm_virtual_network" "terraformnetwork" {
-    name                = "virtualNetwork"
+    name                = join("", [var.project_name,"-vnet"])
     address_space       = ["10.0.0.0/16"]
-    location            = "norwayeast"
+    location            = var.location
     resource_group_name = azurerm_resource_group.terraformgroup.name
 
     tags = {
@@ -33,8 +33,8 @@ resource "azurerm_virtual_network" "terraformnetwork" {
 }
 
 # Subnet
-resource "azurerm_subnet" "subnet" {
-    name                 = "subnet"
+resource "azurerm_subnet" "terraformsubnet" {
+    name                 = join("", [var.project_name,"-subnet"])
     resource_group_name  = azurerm_resource_group.terraformgroup.name
     virtual_network_name = azurerm_virtual_network.terraformnetwork.name
     address_prefixes       = ["10.0.2.0/24"]
@@ -42,8 +42,8 @@ resource "azurerm_subnet" "subnet" {
 
 # Public IP
 resource "azurerm_public_ip" "terraformpublicip" {
-    name                         = "publicIP"
-    location                     = "norwayeast"
+    name                         = join("", [var.project_name,"-publicIP"])
+    location                     = var.location
     resource_group_name          = azurerm_resource_group.terraformgroup.name
     allocation_method            = "Dynamic"
 
@@ -54,8 +54,8 @@ resource "azurerm_public_ip" "terraformpublicip" {
 
 # Network security group
 resource "azurerm_network_security_group" "terraformnsg" {
-    name                = "networkSecurityGroup"
-    location            = "norwayeast"
+    name                = join("", [var.project_name, "-NSG"])
+    location            = var.location
     resource_group_name = azurerm_resource_group.terraformgroup.name
 
     security_rule {
@@ -77,8 +77,8 @@ resource "azurerm_network_security_group" "terraformnsg" {
 
 # Network interface card
 resource "azurerm_network_interface" "terraformnic" {
-    name                        = "terraform-vm-nic"
-    location                    = "norwayeast"
+    name                        = join("", [var.project_name, "-nic"])
+    location                    = var.location
     resource_group_name         = azurerm_resource_group.terraformgroup.name
 
     ip_configuration {
@@ -99,19 +99,20 @@ resource "azurerm_network_interface_security_group_association" "example" {
     network_security_group_id = azurerm_network_security_group.terraformnsg.id
 }
 
-# Storage account
+# Random ID for Storage account
 resource "random_id" "randomId" {
     keepers = {
         # Generate a new ID only when a new resource group is defined
         resource_group = azurerm_resource_group.terraformgroup.name
     }
-
     byte_length = 8
 }
+
+# Storage account
 resource "azurerm_storage_account" "storageaccount" {
-    name                        = "diag${random_id.randomId.hex}"
+    name                        = "storage${random_id.randomId.hex}"
     resource_group_name         = azurerm_resource_group.terraformgroup.name
-    location                    = "norwayeast"
+    location                    = var.location
     account_replication_type    = "LRS"
     account_tier                = "Standard"
 
@@ -120,26 +121,16 @@ resource "azurerm_storage_account" "storageaccount" {
     }
 }
 
-# Create (and display) an SSH key
-resource "tls_private_key" "example_ssh" {
-  algorithm = "RSA"
-  rsa_bits = 4096
-}
-output "tls_private_key" { 
-    value = tls_private_key.example_ssh.private_key_pem 
-    sensitive = true
-}
-
 # Virtual machine
 resource "azurerm_linux_virtual_machine" "terraformvm" {
-    name                  = "terraform-vm"
-    location              = "norwayeast"
+    name                  = join("", [var.project_name, "-vm"])
+    location              = var.location
     resource_group_name   = azurerm_resource_group.terraformgroup.name
     network_interface_ids = [azurerm_network_interface.terraformnic.id]
     size                  = "Standard_B2s"
 
     os_disk {
-        name              = "osDisk"
+        name              = join("", [var.project_name, "-osDisk"])
         caching           = "ReadWrite"
         storage_account_type = "Premium_LRS"
     }
@@ -151,13 +142,13 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         version   = "latest"
     }
 
-    computer_name  = "terraform-vm"
-    admin_username = "sysAdmin"
+    computer_name  = join("", [var.project_name, "-vm"])
+    admin_username = var.user_name
     disable_password_authentication = true
 
     admin_ssh_key {
-        username       = "sysAdmin"
-        public_key     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKN4ntF9YHFsDwbH8ISb/OcTRacT5os8CUNy/Mgah0mJtUShhV+sHZRl1nSCn/c7yU4iOLoN64U3Ejskk7a/KjMg5QH8xUbmol5Gj5MyODaNN58VW3PD2e1doeCEwO68d/C2P1Y0kiTNZpcQdnvgAcIgXctdP/8yvG2E3N162Ahwl/KKERgSyVEbewm0vs5s4lyogseFU+taXQKVl1gsXS6oVZw0qqTSHkxFhv3gAdu7izBtA4AussjFTK+aKDMPBCeNVzmGZGXmSmuJjf32t17eE9BPqsmIKdJNCBEcnGODPPf+zOTVK6DRlMAwI70dnfyOELzO1c7H2+cpwVPyMLHGjF+ObqcNy+dqQug0J1ap/QteSo6jPRk1wWwcwFZzRFygGDNU83CaJX9ZZDC4EBcArcuj1xoI2oFSKUxn6uXbfzmfhZ9OqCxwk1aCuJfDqJoot1MLIyQ2azvD7VBAML1OEW3oEt4V5lDFrbZ1mdmKt4qI37/tp1cLFFF/WR6EoC/gTczShjaD8OQlE4kTl7ZhP1193MF9KbFX2WtH8/LQ0FinrZi8gCtiqx+GfN4Et2EMo4e7fsVAlXdp6zeZTDqrJiOxy5O9NcetZmKz0+tcTAG59uwzvgzGW49UrrpE8Tx4OznKIbRs2JrazdEYXqV8W8UsL1YpjI67WdxN4vjQ== morten@morten-laptop"
+        username       = var.user_name
+        public_key     = var.public_key
     }
 
     boot_diagnostics {

@@ -15,46 +15,62 @@ jobs:
     
     # Environment variables
     env:
-      tf_actions_working_dir: ./terraform
+      ARM_CLIENT_ID: <INSERT CLIENT ID ID HERE> # Consider using Github Secrets
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_SP_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: <INSERT SUBSCRIPTION ID HERE> # Consider using Github Secrets
+      ARM_TENANT_ID: <INSERT TENANT ID HERE> # Consider using Github Secrets
+      tf_actions_working_dir: ./ansible-vm-with-terraform
+      resourceGroup: myResourceGroup
+      vmName: myProjectName-vm
       
+
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }} 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_SP_CREDS }}
       - uses: hashicorp/setup-terraform@v1
 
-      - name: 'Terraform Format'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'fmt'
-          tf_actions_working_dir: ${{ tf_actions_working_dir }}
-          
-      - name: 'Terraform Init'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: ${{ tf_actions_working_dir }}
-  
-      - name: 'Terraform Validate'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'validate'
-          tf_actions_working_dir: ${{ tf_actions_working_dir }}
-          
-      - name: 'Terraform Plan'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'plan'
-          tf_actions_working_dir: ${{ tf_actions_working_dir }}
-  
+      - name: Check account
+        run: az account show
+        
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: ${{ tf_actions_working_dir }}
+        run: terraform apply -auto-approve
+      
+      - name: Update and install dependencies
+        run: |
+          echo Updating system..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt update"
+          echo Running install software-properties-common
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt install software-properties-common"
+          echo Running add-apt-repository --yes --update ppa:ansible/ansible
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo add-apt-repository --yes --update ppa:ansible/ansible"
+          echo Installing Ansible..
+          az vm run-command invoke -g ${{ env.resourceGroup }} -n ${{ env.vmName }} --command-id RunShellScript --scripts "sudo apt -y install ansible"
