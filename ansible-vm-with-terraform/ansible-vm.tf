@@ -12,7 +12,7 @@ provider "azurerm" {
 
 # Resource group
 resource "azurerm_resource_group" "terraformgroup" {
-    name     = var.resource_group
+    name     = "${ var.project_name } -vnet"
     location = var.location
 
     tags = {
@@ -22,7 +22,7 @@ resource "azurerm_resource_group" "terraformgroup" {
 
 # Virtual network
 resource "azurerm_virtual_network" "terraformnetwork" {
-    name                = format(var.project_name, "-vnet")
+    name                = ${{ var.project_name }}."-vnet"
     address_space       = ["10.0.0.0/16"]
     location            = var.location
     resource_group_name = azurerm_resource_group.terraformgroup.name
