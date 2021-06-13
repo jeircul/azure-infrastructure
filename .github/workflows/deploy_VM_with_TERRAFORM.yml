@@ -63,7 +63,7 @@ jobs:
         run: terraform apply -auto-approve
       
       - name: Update System
-        run: apt-get update
+        run: sudo apt-get update
       
       - name: Install Ansible
         run: sudo apt install software-properties-common && sudo add-apt-repository --yes --update ppa:ansible/ansible && sudo apt install ansible
