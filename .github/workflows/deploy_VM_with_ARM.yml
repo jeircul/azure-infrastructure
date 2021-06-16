@@ -18,7 +18,7 @@ jobs:
       subscription: 11131e4f-d655-463c-8ad8-908136be7c4b # This subscription need to already exist
       resourceGroup: MoaursTest # This resource group will be created if it does not exist from before
       location: norwayeast
-      vmName: MyProject-vm # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
+      vmName: MoaursTest-vm # This value need to be project name + -vm (project name is set in ansible-vm-with-arm\ansible-vm.parameters.json)
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
