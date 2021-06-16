@@ -12,7 +12,7 @@
         "value": "SysAdmin"
       },
       "adminPublicKey": {
-        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD4oMudleB65APD0MLTutnbSXNsVpknUMlc59ZQTjlhhKe1mM+pS/sOJZnABGSbQg6Bu0YnsyH64/FCt3+d9h3LKtdl3TUwyNCG7y8NnQzN2x/C0A4dU0RhbmX1TnU05esN3B7cIwt6ci1ykavT7Ki+YEEuv4cTP+wHRg2t+EO44IMmSb+wXtfPTGZQMhDM6rsyqAhnwayoq8ThLDHzmJoBi7y6WdB8KhE+hvPQGNCNQNmJp1nHhCYRgBmdCN7BS5KYO+yeikX5fY6XOSDCKgaDMoh1PrFA37AEsBio14zHo+eRYH75lsR2ckNnz1ymNRO8zj6cbvPyLTT5seTOtoIJ9XoVpJpzv1ccoVVM9BOTQZP7MBBFi8iTcVwsyXnV6My9lKmDBA/+TuHmww9So3mPQhJz3kM/yhCSy5IyeMKJtmmpA0XFeCOwrdeaL2UMyXGaMBQnMDkUsY3roys2LsCgzNIxeK2chxaka+/uXu72y7jAnfOefrxQWUBgkrlQMfs= jeircul@x220"
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUbLdchQTtt98Vz1tHFZNcKC8RbArxDvcMxH7h1PGVb1jA7zUhP/IsIi7nhzDr1c+VjPfS/mnyAgXIE7KnbENhNGQoFng1K8Pa5xp+mt+Sufps0LEOGXqsFxmhlZAbLq1OI6WRqjv2p60PAumFXeIlEXtKTHp0gAreAcTtHFbSbuHW7YyfZnJEsdRsL+9ahYvZY6v2/+r4wgT7+qUPhbP2ld73L3t5YDsSpveG3h/sXrAGdx/0eJN1e6Nopo1xgrGOEDjZaeRyt6+XNnhzw8dmDKglzZnoHb4xDsXhtPYnHZ9p/q0K1DUR4Jgzq+bjEacXhs1nQ9caJ4FeM1k/svkXaol5pW2pXBMdkmYDSV6TFxUzft6mLxnq8Rpz7BaRpLzbm8XvhgtxykwvI75jdZyVmaciZM6EkBYJjROjn5xhBTpS6dB3z29Iw0tKRooVEHDiDmpIY4bAxlMe7Q382WJJW+hHC5LJC6jdpusFszHK+fr254stBep5ZXM3xB6U24E= generated-by-azure"
       },
       "vmSize": {
         "value": "Standard_B2s"
