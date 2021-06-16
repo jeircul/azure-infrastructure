@@ -3,11 +3,11 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "projectName": {
-        "value": "MyProject"
-      }, 
+        "value": "TestingMoaurs"
+      },
       "location": {
         "value": "norwayeast"
-      }, 
+      },
       "adminUsername": {
         "value": "SysAdmin"
       },
