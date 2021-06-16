@@ -12,7 +12,7 @@
         "value": "SysAdmin"
       },
       "adminPublicKey": {
-        "value": "<INSERT PUBLIC KEY HERE>"
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD4oMudleB65APD0MLTutnbSXNsVpknUMlc59ZQTjlhhKe1mM+pS/sOJZnABGSbQg6Bu0YnsyH64/FCt3+d9h3LKtdl3TUwyNCG7y8NnQzN2x/C0A4dU0RhbmX1TnU05esN3B7cIwt6ci1ykavT7Ki+YEEuv4cTP+wHRg2t+EO44IMmSb+wXtfPTGZQMhDM6rsyqAhnwayoq8ThLDHzmJoBi7y6WdB8KhE+hvPQGNCNQNmJp1nHhCYRgBmdCN7BS5KYO+yeikX5fY6XOSDCKgaDMoh1PrFA37AEsBio14zHo+eRYH75lsR2ckNnz1ymNRO8zj6cbvPyLTT5seTOtoIJ9XoVpJpzv1ccoVVM9BOTQZP7MBBFi8iTcVwsyXnV6My9lKmDBA/+TuHmww9So3mPQhJz3kM/yhCSy5IyeMKJtmmpA0XFeCOwrdeaL2UMyXGaMBQnMDkUsY3roys2LsCgzNIxeK2chxaka+/uXu72y7jAnfOefrxQWUBgkrlQMfs= jeircul@x220"
       },
       "vmSize": {
         "value": "Standard_B2s"
