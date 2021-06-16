@@ -18,6 +18,7 @@ And if someone can use this to get some ideas of their own, thats just a plus!
         (...)
     }
     ```
+    Tip: When creating the SP, store the json output in a safe place so you have access to it later. You will not be able to retrieve the information later.
 - You need to [create a public-private key pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys) to use the server with ssh private keys. Public key can be put in *ansible-vm.parameters.json*. Private key should **never** be shared.
 
 ### Workflow
@@ -55,6 +56,7 @@ In the Azure portal, navigate to your VM and choose *Connect* for details of how
         (...)
     }
     ```
+    Tip: When creating the SP, store the json output in a safe place so you have access to it later. You will not be able to retrieve the information later.
 - You need to [create a public-private key pair](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys) to use the server with ssh private keys. Public key can be put in *ansible-vm.parameters.json*. Private key should **never** be shared.
 
 ### Workflow
