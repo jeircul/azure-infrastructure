@@ -14,8 +14,7 @@ And if someone can use this to get some ideas of their own, thats just a plus!
         "clientId": "<GUID>",
         "clientSecret": "<GUID>",
         "subscriptionId": "<GUID>",
-        "tenantId": "<GUID>",
-        (...)
+        "tenantId": "<GUID>"
     }
     ```
     Tip: When creating the SP, store the json output in a safe place so you have access to it later. You will not be able to retrieve the information later.
@@ -52,8 +51,7 @@ In the Azure portal, navigate to your VM and choose *Connect* for details of how
         "clientId": "<GUID>",
         "clientSecret": "<GUID>",
         "subscriptionId": "<GUID>",
-        "tenantId": "<GUID>",
-        (...)
+        "tenantId": "<GUID>"
     }
     ```
     Tip: When creating the SP, store the json output in a safe place so you have access to it later. You will not be able to retrieve the information later.
