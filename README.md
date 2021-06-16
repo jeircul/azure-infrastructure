@@ -8,7 +8,7 @@ And if someone can use this to get some ideas of their own, thats just a plus!
 
 ### Prerequisites
 - You need an Azure account and subscription
-- You need a [service principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) and define a new secret in Github Secrets. The secret must be called AZURE_SP_CREDS and it needs to have a structure like this: 
+- You need a [service principal](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_create) (include the *--sdk-auth* parameter) and define a new secret in Github Actions Secrets. The secret must be called AZURE_SP_CREDS and it needs to have a structure like this: 
     ```json
     {
         "clientId": "<GUID>",
@@ -45,7 +45,7 @@ In the Azure portal, navigate to your VM and choose *Connect* for details of how
 ## Deploy an Ubuntu VM with Ansible installed using Terraform
 ### Prerequisites
 - You need an Azure account and subscription
-- You need a [service principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) and define a new secret in Github Secrets. The secret must be called AZURE_SP_CREDS and it needs to have a structure like this: 
+- You need a [service principal](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_create) (include the *--sdk-auth* parameter) and define a new secret in Github Actions Secrets. The secret must be called AZURE_SP_CREDS and it needs to have a structure like this: 
     ```json
     {
         "clientId": "<GUID>",
