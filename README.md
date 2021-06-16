@@ -1,6 +1,6 @@
 # azure-infrastructure
 This is my introduction to Infrastructure as Code.
-There are a lot of approvements that can be done, but my goal is to learn IAC and some of the tools that goes with it.
+There are a lot of improvements that can be done, but my goal is to learn IAC and some of the tools that goes with it.
 
 And if someone can use this to get some ideas of their own, thats just a plus!
 
