@@ -12,7 +12,7 @@
         "value": "SysAdmin"
       },
       "adminPublicKey": {
-        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUbLdchQTtt98Vz1tHFZNcKC8RbArxDvcMxH7h1PGVb1jA7zUhP/IsIi7nhzDr1c+VjPfS/mnyAgXIE7KnbENhNGQoFng1K8Pa5xp+mt+Sufps0LEOGXqsFxmhlZAbLq1OI6WRqjv2p60PAumFXeIlEXtKTHp0gAreAcTtHFbSbuHW7YyfZnJEsdRsL+9ahYvZY6v2/+r4wgT7+qUPhbP2ld73L3t5YDsSpveG3h/sXrAGdx/0eJN1e6Nopo1xgrGOEDjZaeRyt6+XNnhzw8dmDKglzZnoHb4xDsXhtPYnHZ9p/q0K1DUR4Jgzq+bjEacXhs1nQ9caJ4FeM1k/svkXaol5pW2pXBMdkmYDSV6TFxUzft6mLxnq8Rpz7BaRpLzbm8XvhgtxykwvI75jdZyVmaciZM6EkBYJjROjn5xhBTpS6dB3z29Iw0tKRooVEHDiDmpIY4bAxlMe7Q382WJJW+hHC5LJC6jdpusFszHK+fr254stBep5ZXM3xB6U24E= generated-by-azure"
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6wWnNGaOxZkrUyTJKCBUnvydhbLUInn+qNTyLCWoD7xBhkhyS/MV7Tsi+mA06czVyPIDLQBQ+eV2lS+8ti14ahV/RyKEtRu34PjPg/G+Zwt4r5L2KtEjj0QGExeqzSYGzpog3DrgS9BNABHxhW4WDeuaxD+UsXrhUoHEhOqoIkWg7qXD8NXnIsMsQ2a0BHnq1D01A3of4qmvP5fpttpm/IGAqk7RGJDrKfeS7+ySdqu8/S+Hun0xBwB8kHtI1qo8gVrsEOU1tR42nNGVACDgUwrmGnKeTWzqjlpvhNHdHnrcu860eroz90oGQu8rRaw4ifwX5dXfbskGNZN4ImYm8DFNP7YKCoa5PSSZiVZZb31kWtso2eTNsN3u958UJRqoHtFa0DlTceoFmfX4wAkBXn6XSzQZL2Hja14vklLUJC8LnjVlT6BWTbre3DhJ6AJnmeF1P+yVxP5Uza/L6KrjlkQwc7uzbM3g8e+oskHBM3Xd8slR7ozUHdW6E8Ld5IeE= generated-by-azure"
       },
       "vmSize": {
         "value": "Standard_B2s"
